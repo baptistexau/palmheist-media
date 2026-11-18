@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>Bandeau TikTok j0keroff</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800;900&display=swap');
+html,body{margin:0;width:1080px;height:1920px;background:transparent;overflow:hidden;font-family:Poppins,'Segoe UI',Arial,sans-serif}
+#wrap{position:absolute;left:50%;transform:translateX(-50%);width:1000px}
+.card{position:relative;border-radius:34px;padding:26px 34px 28px 34px;display:flex;align-items:center;gap:26px;
+ background:linear-gradient(135deg,rgba(38,14,74,.92),rgba(88,34,170,.88) 55%,rgba(145,70,255,.85));
+ border:2px solid rgba(255,255,255,.22);box-shadow:0 0 0 1px rgba(145,70,255,.5),0 18px 50px rgba(0,0,0,.45),0 0 60px rgba(145,70,255,.45);overflow:hidden}
+.card:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.22) 45%,transparent 60%);transform:translateX(-120%);animation:shine 5s ease-in-out infinite}
+@keyframes shine{0%,62%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.ico{flex:none;width:132px;height:132px;flex-direction:column;gap:4px;border-radius:30px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:66px;position:relative;animation:bob 2.4s ease-in-out infinite}
+.ico:after{content:"";position:absolute;inset:-6px;border-radius:34px;border:3px solid rgba(255,255,255,.35);animation:ring 2.4s ease-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-6px) rotate(3deg)}}
+@keyframes ring{0%{opacity:.9;transform:scale(.92)}100%{opacity:0;transform:scale(1.25)}}
+.txt{flex:1;min-width:0;position:relative;height:124px}
+.nm{font-size:19px;font-weight:800;color:#fff;letter-spacing:.5px}
+.msg{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);opacity:0;transition:opacity .5s,transform .5s cubic-bezier(.2,1.4,.4,1)}
+.msg.on{opacity:1;transform:translateY(-50%)}
+.msg.in{transform:translateY(-10%)}
+.msg.out{opacity:0;transform:translateY(-90%)}
+.k{display:inline-flex;align-items:center;gap:10px;font-size:25px;font-weight:800;letter-spacing:3px;color:#ffd4f5;text-transform:uppercase;margin-bottom:4px}
+.k i{width:13px;height:13px;border-radius:50%;background:#ff3b5c;box-shadow:0 0 12px #ff3b5c;animation:blink 1.1s infinite}
+@keyframes blink{50%{opacity:.25}}
+.t{font-size:41px;line-height:1.12;font-weight:900;color:#fff;text-shadow:0 3px 14px rgba(0,0,0,.35)}
+.t b{background:linear-gradient(90deg,#ffe066,#ff8ad8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.dots{position:absolute;right:30px;bottom:14px;display:flex;gap:8px}
+.dots span{width:9px;height:9px;border-radius:5px;background:rgba(255,255,255,.35);transition:all .4s}
+.dots span.on{width:26px;background:#fff}
+</style></head>
+<body>
+<div id="wrap"><div class="card">
+ <div class="ico" id="ico"><svg viewBox="0 0 24 26" width="64" height="70"><path fill="#fff" d="M2.1 0 .5 4.2v17.1h5.8V24.5h3.2l3.2-3.2h4.7l6.3-6.3V0zm19.5 13.9-3.7 3.7h-5.8l-3.2 3.2v-3.2H4V2.1h17.6z"/><path fill="#fff" d="M17.4 5.8h2.1v6.3h-2.1zm-5.8 0h2.1v6.3h-2.1z"/></svg><div class="nm">j0keroff</div></div>
+ <div class="txt" id="txt"></div>
+ <div class="dots" id="dots"></div>
+</div></div>
+<script>
+// Paramètres : ?y=190 (position verticale) &d=6 (secondes par message) &o=1 (opacité)
+const q=new URLSearchParams(location.search);
+document.getElementById('wrap').style.top=(+q.get('y')||190)+'px';
+document.getElementById('wrap').style.opacity=q.get('o')||1;
+const D=(+q.get('d')||6)*1000;
+const M=[
+ ['🎮','EN DIRECT','🎮 Le chat <b>contrôle mon jeu</b>… sur l\'autre app 👀'],
+ ['💬','CHAT INTERACTIF','💬 Je réponds au chat <b>uniquement</b> sur l\'autre app 👀'],
+ ['🗳️','LE CHAT DÉCIDE','🗳️ Tu votes <b>1 ou 2</b>… et je dois obéir 😈'],
+ ['👀','LE LIVE COMPLET','Le gameplay en entier ? <b>Regarde le logo</b> 👈'],
+];
+const txt=document.getElementById('txt'),ico=document.getElementById('ico'),dots=document.getElementById('dots');
+const els=M.map(([e,k,t])=>{const d=document.createElement('div');d.className='msg';d.innerHTML=`<div class="k"><i></i>${k}</div><div class="t">${t}</div>`;txt.appendChild(d);const s=document.createElement('span');dots.appendChild(s);return [d,s];});
+let i=0;
+function show(n){els.forEach(([d,s],j)=>{if(j===n){d.className='msg in';requestAnimationFrame(()=>requestAnimationFrame(()=>d.className='msg on'));s.className='on';}else{if(d.className.includes('on'))d.className='msg out';s.className='';}});}
+show(0);setInterval(()=>{i=(i+1)%M.length;show(i);},D);
+</script>
+</body></html>
