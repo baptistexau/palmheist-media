@@ -53,4 +53,9 @@ let i=0;
 function show(n){els.forEach(([d,s],j)=>{if(j===n){d.className='msg in';requestAnimationFrame(()=>requestAnimationFrame(()=>d.className='msg on'));s.className='on';}else{if(d.className.includes('on'))d.className='msg out';s.className='';}});}
 show(0);setInterval(()=>{i=(i+1)%M.length;show(i);},D);
 </script>
+<style>html,body{width:100vw!important;height:100vh!important;margin:0!important;overflow:hidden!important;background:transparent!important}</style>
+<script>(function(){var st=document.createElement('div');st.id='__stage';st.style.cssText='position:absolute;left:0;top:0;width:1080px;height:1920px;transform-origin:0 0;overflow:hidden';
+while(document.body.firstChild)st.appendChild(document.body.firstChild);document.body.appendChild(st);
+function fit(){var s=Math.min(innerWidth/1080,innerHeight/1920);st.style.transform='translate('+((innerWidth-1080*s)/2)+'px,'+((innerHeight-1920*s)/2)+'px) scale('+s+')';}
+addEventListener('resize',fit);fit();})();</script>
 </body></html>
